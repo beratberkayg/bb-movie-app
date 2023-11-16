@@ -1,4 +1,4 @@
-"use client";
+import React from "react";
 
 import "./preloader.css";
 
@@ -14,9 +14,9 @@ const Preloader = () => {
         >
           <source src="/blackhole.webm" type="video/webm" />
         </video>
-        <div className="preloader-text text-black text-2xl md:text-3xl w-full text-center shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md py-1">
+        {/* <div className="preloader-text text-black text-2xl md:text-3xl w-full text-center shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md py-1">
           I'm BB, this is my design...
-        </div>
+        </div> */}
       </div>
     </div>
   );
