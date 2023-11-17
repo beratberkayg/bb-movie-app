@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} flex flex-col min-h-screen mx-3 md:mx-24 lg:mx-72 bg-gray-200`}
+        className={`${roboto.className} flex flex-col min-h-screen mx-3 md:mx-24 lg:mx-40 bg-slate-200 `}
       >
         <ReduxProvider>
           <Navbar />
