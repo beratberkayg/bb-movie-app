@@ -18,7 +18,7 @@ interface MoviesType {
 const Anasayfa = async ({ searchParams }: { searchParams: SearchParams }) => {
   const res = await fetch(
     `${API_URL}/${
-      searchParams.genre ? "movie/" + searchParams.genre : "trending/all/day"
+      searchParams.genre ? "movie/" + searchParams.genre : "movie//now_playing"
     }?api_key=${API_KEY}&language=en-US&page=1`,
     { next: { revalidate: 10000 } }
   );
@@ -32,7 +32,7 @@ const Anasayfa = async ({ searchParams }: { searchParams: SearchParams }) => {
         <input type="text" className="w-full" placeholder="Ne Aramıştınız ?" />
       </div>
 
-      <div className="flex justify-center items-center flex-wrap gap-3 py-1 bg-slate-400">
+      <div className="w-full flex flex-wrap justify-evenly gap-5">
         {movies?.map((movie, i) => (
           <MoiveCard key={i} movie={movie} />
         ))}
