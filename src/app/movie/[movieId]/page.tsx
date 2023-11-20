@@ -11,18 +11,10 @@ const getMovie = async (id: string) => {
   return await res.json();
 };
 
-const getMovieVideo = async (id: string) => {
-  const res = await fetch(`${API_URL}/${id}/videos?api_key=${API_KEY}`);
-  return await res.json();
-};
-
 const MovieDetail = async ({ params }: any) => {
   const id = params.movieId as string;
 
   const movie: MovieType = await getMovie(id);
-  const video = await getMovieVideo(id);
-
-  console.log(video);
 
   return (
     <div className="">
