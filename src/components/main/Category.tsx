@@ -27,7 +27,7 @@ const Category = () => {
   ];
 
   return (
-    <div className="w-full md:w-[90%] mx-auto flex justify-between px-2 py-1 text-xl font-medium border-b border-blue-700">
+    <div className="w-full md:w-[90%] mx-auto flex justify-between px-2 py-1 text-sm md:text-xl lg:text-2xl font-medium border-b border-blue-700">
       {categories.map((category, index) => (
         <Link
           className={`${

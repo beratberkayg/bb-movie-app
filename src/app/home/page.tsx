@@ -1,5 +1,4 @@
 import Category from "@/components/main/Category";
-import { useSearchParams } from "next/navigation";
 import React from "react";
 import { MovieType } from "../type";
 import MoiveCard from "@/components/main/MoiveCard";
@@ -18,7 +17,7 @@ interface MoviesType {
 const Anasayfa = async ({ searchParams }: { searchParams: SearchParams }) => {
   const res = await fetch(
     `${API_URL}/${
-      searchParams.genre ? "movie/" + searchParams.genre : "movie//now_playing"
+      searchParams.genre ? "movie/" + searchParams.genre : "movie/now_playing"
     }?api_key=${API_KEY}&language=en-US&page=1`,
     { next: { revalidate: 10000 } }
   );
