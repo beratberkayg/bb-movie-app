@@ -29,7 +29,7 @@ const MovieDetail = async ({ params }: any) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="rounded-lg"
         />
-        <div className="absolute top-0 left-0 w-full h-full bg-[#03001417] backdrop-blur text-white flex flex-col items-center py-3 md:py-7 lg:py-10 gap-3 rounded-lg">
+        <div className="absolute top-0 left-0 w-full h-full bg-[#03001417] backdrop-blur-md text-white flex flex-col items-center py-3 md:py-7 lg:py-10 gap-3 rounded-lg">
           <div className="relative w-[250px] h-[300px] md:w-[350px] md:h-[450px] lg:w-[500px] lg:h-[600px]">
             <Image
               alt=""
