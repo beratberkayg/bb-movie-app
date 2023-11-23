@@ -19,7 +19,7 @@ export const getMovie = createAsyncThunk(
   "getMovies",
   async (id?: string | string[]) => {
     const { data } = await axios.get(
-      `${API_URL}/${id}?api_key=${API_KEY}&language=en-US&page=1`
+      `${API_URL}/${id}?api_key=${API_KEY}&language=tr-TR&page=1`
     );
 
     return data;

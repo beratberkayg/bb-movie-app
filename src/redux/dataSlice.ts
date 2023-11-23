@@ -21,7 +21,7 @@ export const getMovies = createAsyncThunk(
     const { data } = await axios.get(
       `${API_URL}/${
         url ? url : "/now_playing"
-      }?api_key=${API_KEY}&language=en-US&page=1`
+      }?api_key=${API_KEY}&language=tr-TR&page=1`
     );
 
     return data.results;

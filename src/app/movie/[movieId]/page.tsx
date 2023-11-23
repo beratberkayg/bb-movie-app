@@ -1,23 +1,25 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Search from "@/components/main/Search";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import { getMovie } from "@/redux/movieSlice";
+import Preloader from "@/components/preloader/Preloader";
 
 const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const id = params.movieId;
   const { movie, loading } = useAppSelector((state) => state.movie);
   const dispatch = useAppDispatch();
 
-  console.log(movie);
-
   useEffect(() => {
     dispatch(getMovie(id));
   }, [id]);
 
+  const [showText, setShowText] = useState<boolean>(false);
+
   return (
-    <div className="mt-5 ">
+    <div className="mt-5 h-full">
+      {loading && <Preloader />}
       <Search />
       <div className="relative container mt-5 flex flex-col gap-3 justify-center ">
         <div className="relative w-full h-[200px] md:h-[300px] lg:h-[350px]">
@@ -47,6 +49,30 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
           </div>
           <div className="text-xl font-bold md:text-2xl">{movie?.title}</div>
         </div>
+      </div>
+      <div className="container mt-3 flex justify-center items-center flex-col">
+        <h2 className="font-bold text-xl md:text-2xl">{movie.title}</h2>
+
+        <span>Yayın Tarihi : {movie.release_date}</span>
+        <span>{movie?.runtime} dakika</span>
+
+        <div
+          className={`w-9 h-9 flex items-center justify-center rounded-full bg-white font-bold border-4 text-xl ${
+            movie?.vote_average?.toFixed > 6
+              ? "text-green-600 border-green-600"
+              : " text-yellow-500 border-yellow-500"
+          }`}
+        >
+          {movie.vote_average?.toFixed()}
+        </div>
+        <p
+          onClick={() => setShowText(!showText)}
+          className={`text-center text-sm sm:text-lg line-clamp-2 lg:line-clamp-none cursor-pointer ${
+            showText ? "line-clamp-none" : ""
+          } `}
+        >
+          {movie.overview}
+        </p>
       </div>
     </div>
   );
