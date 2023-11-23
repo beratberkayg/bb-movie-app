@@ -10,7 +10,7 @@ const MoiveCard = ({ movie }: { movie: MovieType }) => {
   return (
     <div
       onClick={() => router.push(`/movie/${movie.id}`)}
-      className="relative w-[130px] h-[200px] sm:w-[200px] sm:h-[300px] md:w-[160px] md:h-[300px] lg:w-[220px] cursor-pointer shadow-[#2A0E61]/50 rounded-xl"
+      className="relative w-[130px] h-[200px] sm:w-[200px] sm:h-[300px] md:w-[210px] md:h-[300px] lg:w-[250px] cursor-pointer shadow-[#2A0E61]/50 rounded-xl"
     >
       <Image
         alt=""

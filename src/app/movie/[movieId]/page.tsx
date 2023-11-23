@@ -1,6 +1,7 @@
 "use client";
 
 import { MovieType } from "@/app/type";
+import Search from "@/components/main/Search";
 import Image from "next/image";
 
 const API_URL = "https://api.themoviedb.org/3/movie";
@@ -21,7 +22,8 @@ const MovieDetail = async ({ params }: { params: paramsProps }) => {
   const movie: MovieType = await getMovie(id);
 
   return (
-    <div className="">
+    <div className="container mt-5 flex flex-col gap-3">
+      <Search />
       <div className="relative min-h-screen rounded-lg">
         <Image
           alt=""
