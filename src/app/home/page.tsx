@@ -2,11 +2,9 @@
 
 import Category from "@/components/main/Category";
 import { useEffect } from "react";
-import { MovieType } from "../type";
 import MoiveCard from "@/components/main/MoiveCard";
 import { getMovies } from "@/redux/dataSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import Preloader from "@/components/preloader/Preloader";
 import Search from "@/components/main/Search";
 
 interface SearchParams {
@@ -22,14 +20,14 @@ const Anasayfa = ({ searchParams }: { searchParams: SearchParams }) => {
     dispatch(getMovies(url));
   }, [url]);
 
-  const movies = data;
+  const movies = Array.isArray(data) ? data : [];
   console.log(data);
 
   return (
     <div className="container mt-3 md:mt-5 flex flex-col justify-center gap-7 2xl:w-full">
       <Search />
       <Category />
-      <div className="w-full flex flex-wrap justify-evenly gap-5">
+      <div className="w-full flex flex-wrap justify-evenly gap-3">
         {movies?.map((movie, i) => (
           <MoiveCard key={i} movie={movie} />
         ))}
