@@ -11,7 +11,11 @@ const getMovie = async (id: string) => {
   return await res.json();
 };
 
-const MovieDetail = async ({ params }: any) => {
+interface paramsProps {
+  [movieId: string]: string | string[];
+}
+
+const MovieDetail = async ({ params }: { params: paramsProps }) => {
   const id = params.movieId as string;
 
   const movie: MovieType = await getMovie(id);

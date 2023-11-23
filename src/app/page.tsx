@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setPageLoading(false);
+      router.push("/home");
     }, 1500);
 
     return () => clearTimeout(timer);
