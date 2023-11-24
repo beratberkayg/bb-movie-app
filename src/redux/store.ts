@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dataSlice from "./dataSlice";
 import movieSlice from "./movieSlice";
-
+import auth from "./authSlice";
 export const store = configureStore({
   reducer: {
     data: dataSlice,
     movie: movieSlice,
+    auth,
   },
 });
 

@@ -1,7 +1,42 @@
 "use client";
-import Link from "next/link";
+
+import {
+  changeEmail,
+  changeName,
+  changePassword,
+  register,
+} from "@/redux/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { auth } from "@/utils/firebase";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
+  const { name, email, password } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeName(e.currentTarget.value));
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeEmail(e.currentTarget.value));
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changePassword(e.currentTarget.value));
+  };
+
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      dispatch(register({ name, email, password }));
+    } catch (error) {
+      console.log(error);
+    }
+    router.push("/");
+  };
+
   return (
     <div className="flex justify-center mt-3 md:mt-5">
       <div className=" relative max-w-2xl md:w-4/6 lg:w-3/6">
@@ -9,7 +44,10 @@ const Register = () => {
           <p className="w-full text-4xl font-medium text-center leading-snug font-serif text-black">
             Hesap Oluştur
           </p>
-          <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+          <form
+            onChange={handleRegister}
+            className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8"
+          >
             <div className="relative">
               <p
                 className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
@@ -18,6 +56,8 @@ const Register = () => {
                 Kullanıcı Adı
               </p>
               <input
+                value={name}
+                onChange={handleNameChange}
                 placeholder="Berat Berkay"
                 type="text"
                 className="border placeholder-gray-300 focus:outline-none
@@ -30,6 +70,8 @@ const Register = () => {
                 Email
               </p>
               <input
+                value={email}
+                onChange={handleEmailChange}
                 placeholder="123@ex.com"
                 type="text"
                 className="border placeholder-gray-400 focus:outline-none
@@ -45,6 +87,8 @@ const Register = () => {
                 Password
               </p>
               <input
+                value={password}
+                onChange={handlePasswordChange}
                 placeholder="Password"
                 type="password"
                 className="border placeholder-gray-400 focus:outline-none
@@ -54,13 +98,14 @@ const Register = () => {
             </div>
             <div className="relative">
               <button
+                type="submit"
                 className="w-full inline-block p-2 text-xl font-medium text-center text-white bg-indigo-500
         rounded-lg transition duration-200 hover:bg-indigo-600 ease"
               >
                 Hesap Oluştur
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

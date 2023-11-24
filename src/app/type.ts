@@ -15,3 +15,9 @@ export interface MovieType {
   vote_count?: number;
   runtime?: number;
 }
+
+export interface initialStateProps {
+  name: string;
+  email: string;
+  password: string;
+}
