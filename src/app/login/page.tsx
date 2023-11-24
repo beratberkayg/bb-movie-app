@@ -1,62 +1,62 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
 const Login = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<any>("");
-
   return (
-    <div className="flex items-center justify-center w-full rounded-3xl z-10">
-      <div className="shadow-black shadow-lg rounded-2xl p-7 flex flex-col gap-7 bg-slate-600 w-4/5 md:w-2/3 lg:w-1/2">
-        <div className=" w-full flex items-center justify-center">
-          <h2 className="text-2xl font-medium">Giriş Yap</h2>
+    <div className="flex justify-center mt-3 md:mt-5">
+      <div className=" relative w-[90%] md:w-4/6 lg:w-3/6">
+        <div className="flex flex-col items-start justify-start py-5 px-10 bg-white   rounded-xl relative z-10">
+          <p className="w-full text-4xl font-medium text-center leading-snug font-serif text-black">
+            Giriş Yap
+          </p>
+          <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+            <div className="relative">
+              <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                Email
+              </p>
+              <input
+                placeholder="123@ex.com"
+                type="text"
+                className="border placeholder-gray-400 focus:outline-none
+          focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+          border-gray-300 rounded-md text-black"
+              />
+            </div>
+            <div className="relative">
+              <p
+                className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+          absolute"
+              >
+                Password
+              </p>
+              <input
+                placeholder="Password"
+                type="password"
+                className="border placeholder-gray-400 focus:outline-none
+          focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+          border-gray-300 rounded-md text-black"
+              />
+            </div>
+            <div className="relative">
+              <button
+                className="w-full inline-block p-2 text-xl font-medium text-center text-white bg-indigo-500
+          rounded-lg transition duration-200 hover:bg-indigo-600 ease"
+              >
+                Giriş Yap
+              </button>
+            </div>
+            <div className="relative">
+              <Link
+                href={"/register"}
+                className="w-full inline-block  text-xl font-medium text-center text-white bg-indigo-500
+        rounded-lg transition duration-200 hover:bg-indigo-600 ease p-2"
+              >
+                Hesap Oluştur
+              </Link>
+            </div>
+          </div>
         </div>
-        <form className=" w-full flex flex-col gap-3 border rounded-lg p-5 shadow-2xl">
-          <div className="flex flex-col gap-1">
-            <label className="cursor-pointer text-xl font-bold" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="rounded-md px-1 py-2 outline-none text-lg"
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label
-              className="cursor-pointer text-xl font-bold"
-              htmlFor="password"
-            >
-              Şifre
-            </label>
-            <input
-              className="rounded-md px-1 py-2 outline-none text-lg"
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Şifreniz"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <input
-            className="flex items-center justify-center border py-3 px-3 text-base md:text-xl rounded-lg bg-black text-white cursor-pointer active:scale-50"
-            type="submit"
-            value="Giriş Yap"
-          />
-        </form>
-        <Link
-          href={"/register"}
-          className="flex items-center justify-center gap-3 border py-3 px-3 text-base md:text-xl rounded-lg bg-black text-white cursor-pointer active:scale-50"
-        >
-          Kayıt Ol
-        </Link>
       </div>
     </div>
   );

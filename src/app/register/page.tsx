@@ -1,75 +1,69 @@
 "use client";
-
-import { useState } from "react";
+import Link from "next/link";
 
 const Register = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
   return (
-    <>
-      <div className="bg-gray-500 w-3/4 md:w-1/2 lg:w-[500px] mx-auto flex flex-col mt-5 md:mt-10 p-3 rounded-lg">
-        <p className="text-center text-xl md:text-2xl lg:text-3xl font-bold mt-5">
-          Kayıt Ol
-        </p>
-        <form className="w-full flex flex-col gap-5 mt-10">
-          <div className="flex flex-col gap-1">
-            <label className="cursor-pointer" htmlFor="name">
-              Kullanıcı Adı
-            </label>
-            <input
-              className="rounded-md px-1 py-2 outline-none text-lg"
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Kullanıcı Adı"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+    <div className="flex justify-center mt-3 md:mt-5">
+      <div className=" relative max-w-2xl md:w-4/6 lg:w-3/6">
+        <div className="flex flex-col items-start justify-start py-5 px-10 bg-white   rounded-xl relative z-10">
+          <p className="w-full text-4xl font-medium text-center leading-snug font-serif text-black">
+            Hesap Oluştur
+          </p>
+          <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+            <div className="relative">
+              <p
+                className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+        absolute"
+              >
+                Kullanıcı Adı
+              </p>
+              <input
+                placeholder="Berat Berkay"
+                type="text"
+                className="border placeholder-gray-300 focus:outline-none
+        focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+        border-gray-300 rounded-md text-black"
+              />
+            </div>
+            <div className="relative">
+              <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                Email
+              </p>
+              <input
+                placeholder="123@ex.com"
+                type="text"
+                className="border placeholder-gray-400 focus:outline-none
+        focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+        border-gray-300 rounded-md text-black"
+              />
+            </div>
+            <div className="relative">
+              <p
+                className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+        absolute"
+              >
+                Password
+              </p>
+              <input
+                placeholder="Password"
+                type="password"
+                className="border placeholder-gray-400 focus:outline-none
+        focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+        border-gray-300 rounded-md text-black"
+              />
+            </div>
+            <div className="relative">
+              <button
+                className="w-full inline-block p-2 text-xl font-medium text-center text-white bg-indigo-500
+        rounded-lg transition duration-200 hover:bg-indigo-600 ease"
+              >
+                Hesap Oluştur
+              </button>
+            </div>
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="cursor-pointer" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="rounded-md px-1 py-2 outline-none text-lg"
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label className="cursor-pointer" htmlFor="password">
-              Şifre
-            </label>
-            <input
-              className="rounded-md px-1 py-2 outline-none text-lg"
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Şifreniz"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span className="text-center">
-              Şifreniz en az 8 karakterli olmalıdır.
-            </span>
-          </div>
-          <input
-            className="flex items-center justify-center border py-3 px-3 text-base md:text-xl rounded-lg bg-black text-white cursor-pointer hover:scale-75"
-            type="submit"
-            value={"Kayıt Ol"}
-          />
-        </form>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

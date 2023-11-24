@@ -58,7 +58,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
 
         <div
           className={`w-9 h-9 flex items-center justify-center rounded-full bg-white font-bold border-4 text-xl ${
-            movie?.vote_average?.toFixed > 6
+            movie.vote_average?.toFixed() > 6
               ? "text-green-600 border-green-600"
               : " text-yellow-500 border-yellow-500"
           }`}

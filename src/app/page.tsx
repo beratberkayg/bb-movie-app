@@ -17,7 +17,7 @@ const Home: React.FC = () => {
     return () => clearTimeout(timer);
   }, [pageLoading]);
 
-  return <>{pageLoading ? <Preloader /> : <div>hayda rinna rina nay</div>}</>;
+  return <>{pageLoading && <Preloader />}</>;
 };
 
 export default Home;
