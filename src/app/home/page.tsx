@@ -27,15 +27,13 @@ const Anasayfa = ({ searchParams }: { searchParams: SearchParams }) => {
   const movies = Array.isArray(data) ? data : [];
   console.log(data);
 
-  const handleLogOut = () => {
-    dispatch(logOut());
-  };
-
   return (
     <div className="container mt-3 md:mt-5 flex flex-col justify-center gap-7 2xl:w-full">
       {user && <div>Hoş Geldin kullanıcı mevcut {user.displayName}</div>}
-      <div onClick={handleLogOut}>Çıkış Yap</div>
-      <Search />
+      <div className="md:hidden">
+        <Search />
+      </div>
+
       <Category />
       <div className="w-full flex flex-wrap justify-evenly gap-3">
         {movies?.map((movie, i) => (
