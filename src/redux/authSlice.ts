@@ -1,7 +1,13 @@
 import { initialStateProps } from "@/app/type";
 import { auth } from "@/utils/firebase";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateCurrentUser,
+  updateProfile,
+} from "firebase/auth";
 
 const initialState: initialStateProps = {
   name: "",
@@ -20,19 +26,21 @@ export const register = createAsyncThunk(
     email: string;
     password: string;
   }) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then((auth) => {
-          updateProfile(auth.user, { displayName: name });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(user.user, { displayName: name });
   }
 );
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async ({ email, password }: { email: string; password: string }) => {
+    await signInWithEmailAndPassword(auth, email, password);
+  }
+);
+
+export const logOut = createAsyncThunk("auth/logOut", async () => {
+  await signOut(auth);
+});
 
 const authSlice = createSlice({
   name: "auth",

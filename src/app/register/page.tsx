@@ -7,7 +7,6 @@ import {
   register,
 } from "@/redux/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { auth } from "@/utils/firebase";
 import { useRouter } from "next/navigation";
 
 const Register = () => {
@@ -29,11 +28,7 @@ const Register = () => {
 
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      dispatch(register({ name, email, password }));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(register({ name, email, password }));
     router.push("/");
   };
 
@@ -41,11 +36,11 @@ const Register = () => {
     <div className="flex justify-center mt-3 md:mt-5">
       <div className=" relative max-w-2xl md:w-4/6 lg:w-3/6">
         <div className="flex flex-col items-start justify-start py-5 px-10 bg-white   rounded-xl relative z-10">
-          <p className="w-full text-4xl font-medium text-center leading-snug font-serif text-black">
+          <p className="w-full text-3xl font-medium text-center leading-snug font-serif text-black">
             Hesap Oluştur
           </p>
           <form
-            onChange={handleRegister}
+            onSubmit={handleRegister}
             className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8"
           >
             <div className="relative">

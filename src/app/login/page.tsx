@@ -1,8 +1,28 @@
 "use client";
 
+import { changeEmail, changePassword, login } from "@/redux/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const { email, password } = useAppSelector((state) => state.auth);
+  const router = useRouter();
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeEmail(e.currentTarget.value));
+  };
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changePassword(e.currentTarget.value));
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    dispatch(login({ email, password }));
+    router.push("/");
+  };
+
   return (
     <div className="flex justify-center mt-3 md:mt-5">
       <div className=" relative w-[90%] md:w-4/6 lg:w-3/6">
@@ -10,12 +30,17 @@ const Login = () => {
           <p className="w-full text-4xl font-medium text-center leading-snug font-serif text-black">
             Giriş Yap
           </p>
-          <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8"
+          >
             <div className="relative">
               <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
                 Email
               </p>
               <input
+                value={email}
+                onChange={handleEmailChange}
                 placeholder="123@ex.com"
                 type="text"
                 className="border placeholder-gray-400 focus:outline-none
@@ -31,6 +56,8 @@ const Login = () => {
                 Password
               </p>
               <input
+                value={password}
+                onChange={handlePasswordChange}
                 placeholder="Password"
                 type="password"
                 className="border placeholder-gray-400 focus:outline-none
@@ -40,6 +67,7 @@ const Login = () => {
             </div>
             <div className="relative">
               <button
+                type="submit"
                 className="w-full inline-block p-2 text-xl font-medium text-center text-white bg-indigo-500
           rounded-lg transition duration-200 hover:bg-indigo-600 ease"
               >
@@ -55,7 +83,7 @@ const Login = () => {
                 Hesap Oluştur
               </Link>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
