@@ -20,14 +20,14 @@ const HamburgerMenu: React.FC<HMenuProps> = ({ menu, setMenu }) => {
     setMenu(!menu);
   };
   return (
-    <div className="w-[200px] h-[200px] z-10 rounded-md bg-orange-500 absolute -top-10 right-0 transition-all flex flex-col justify-center items-center">
+    <div className="w-[180px] h-[180px] z-10 rounded-md bg-orange-500 absolute lg:top-24 lg:right-28 top-20 right-3 transition-all flex flex-col justify-center items-center">
       <div
-        className="absolute top-10 right-0 cursor-pointer"
+        className=" absolute right-0 top-2 cursor-pointer hover:text-red-500"
         onClick={() => setMenu(!menu)}
       >
         <IoClose size={35} />
       </div>
-      <div className="mt-8 flex flex-col gap-5">
+      <div className="flex flex-col gap-5">
         <Link
           onClick={() => setMenu(!menu)}
           href={`/userprofile/${user?.uid}`}

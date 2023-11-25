@@ -8,11 +8,21 @@ import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Search from "../main/Search";
 import { useState } from "react";
-import { IoClose } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const [menu, setMenu] = useState<boolean>(false);
+  const router = useRouter();
+
+  if (loading) {
+    return (
+      <nav className="flex justify-center items-center pt-10 pb-7 border-b border-black">
+        <h2 className="text-2xl">Kullanıcı Bekleniyor...</h2>
+      </nav>
+    );
+  }
+
   return (
     <div className="mt-3 md:mt-5 w-full h-16 flex items-center justify-between  border-b border-gray-500 ">
       <Logo />

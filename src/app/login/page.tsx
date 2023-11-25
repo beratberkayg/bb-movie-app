@@ -39,6 +39,7 @@ const Login = () => {
                 Email
               </p>
               <input
+                required
                 value={email}
                 onChange={handleEmailChange}
                 placeholder="123@ex.com"
@@ -56,6 +57,7 @@ const Login = () => {
                 Password
               </p>
               <input
+                required
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Password"
