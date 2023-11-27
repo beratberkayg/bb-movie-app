@@ -44,28 +44,34 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
               }`}
               alt=""
               fill
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               objectFit="cover"
               className="rounded-lg"
             />
           </div>
-          <div className="text-xl font-bold md:text-2xl">{movie?.title}</div>
+          <div className="text-lg font-bold md:text-2xl">{movie?.title}</div>
         </div>
       </div>
       <div className="container mt-3 flex justify-center items-center flex-col">
-        <h2 className="font-bold text-xl md:text-2xl">{movie.title}</h2>
+        <h2 className="font-bold text-lg md:text-2xl">{movie.title}</h2>
 
         <span>Yayın Tarihi : {movie.release_date}</span>
         <span>{movie?.runtime} dakika</span>
+        <div className="flex justify-center items-center gap-3">
+          <span>IMDb Puanı :</span>
 
-        <div
-          className={`w-9 h-9 flex items-center justify-center rounded-full bg-white font-bold border-4 text-xl ${
-            voteAverage && parseFloat(voteAverage) > 6
-              ? "text-green-600 border-green-600"
-              : " text-yellow-500 border-yellow-500"
-          }`}
-        >
-          {movie.vote_average?.toFixed()}
+          <div
+            className={`w-9 h-9 flex items-center justify-center rounded-full bg-white font-bold border-4 text-xl ${
+              voteAverage && parseFloat(voteAverage) > 6
+                ? "text-green-600 border-green-600"
+                : " text-yellow-500 border-yellow-500"
+            }`}
+          >
+            {movie.vote_average?.toFixed()}
+          </div>
         </div>
+
         <p
           onClick={() => setShowText(!showText)}
           className={`text-center text-sm sm:text-lg line-clamp-2 lg:line-clamp-none cursor-pointer ${

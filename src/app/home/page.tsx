@@ -9,7 +9,6 @@ import Search from "@/components/main/Search";
 import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-
 interface SearchParams {
   [key: string]: string | string[];
 }

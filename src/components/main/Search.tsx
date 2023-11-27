@@ -9,7 +9,10 @@ const Search = () => {
   const router = useRouter();
 
   const searchFunc = (e: any) => {
-    if (e.key === "Enter" && keyword.length >= 3) {
+    if (
+      (e.key === "Enter" && keyword.length >= 3) ||
+      (e.type === "click" && keyword.length >= 3)
+    ) {
       router.push(`/search/${keyword}`);
       setKeyword("");
     }
@@ -20,13 +23,19 @@ const Search = () => {
       <input
         id="search"
         type="text"
-        className="w-full outline-none p-1 rounded-md text-blue-700 font-medium text-center text-lg shadow-[#2A0E61] shadow-lg "
+        className="w-full outline-none py-1 rounded-md text-blue-700 font-medium text-center text-lg shadow-[#2A0E61] shadow-lg "
         placeholder="Ne Aramıştınız ?"
         value={keyword}
         onKeyDown={searchFunc}
         onChange={(e) => setKeyword(e.target.value)}
       />
-      <BiSearch onClick={searchFunc} size={35} cursor={"pointer"} />
+
+      <BiSearch
+        className={"hover:text-orange-500"}
+        onClick={searchFunc}
+        size={35}
+        cursor={"pointer"}
+      />
     </div>
   );
 };
