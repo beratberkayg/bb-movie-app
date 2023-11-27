@@ -3,20 +3,29 @@ import { useEffect, useState } from "react";
 import Search from "@/components/main/Search";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
-import { getMovie } from "@/redux/movieSlice";
+import { getMovie, getVideos } from "@/redux/movieSlice";
 import Preloader from "@/components/preloader/Preloader";
+import YouTube, { YouTubeProps } from "react-youtube";
+import { IoClose } from "react-icons/io5";
 
 const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const id = params.movieId;
-  const { movie, loading } = useAppSelector((state) => state.movie);
+  const { movie, loading, video } = useAppSelector((state) => state.movie);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getMovie(id));
+    dispatch(getVideos(id));
   }, [id]);
 
   const [showText, setShowText] = useState<boolean>(false);
+  const [trailer, setTrailer] = useState<boolean>(false);
   const voteAverage = movie.vote_average?.toFixed();
+
+  const opts: YouTubeProps["opts"] = {
+    height: "500",
+    width: "650",
+  };
 
   return (
     <div className="mt-5 h-full">
@@ -38,6 +47,17 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
         </div>
         <div className="absolute top-0 left-0 w-full h-full backdrop-blur-sm text-white flex flex-col items-center py-3 md:py-7 lg:py-10 gap-3 rounded-lg">
           <div className="relative w-[200px] h-[100px] md:w-[400px] md:h-[180px] lg:w-[600px] lg:h-[250px] ">
+            {trailer && (
+              <div className="absolute z-10 w-full justify-center items-center hidden md:flex">
+                <YouTube opts={opts} videoId={video.key} />
+                <div
+                  onClick={() => setTrailer(!trailer)}
+                  className="absolute top-0 z-50 cursor-pointer text-red-600 border-2 rounded-full bg-white"
+                >
+                  <IoClose size={30} />
+                </div>
+              </div>
+            )}
             <Image
               src={`https://image.tmdb.org/t/p/original/${
                 movie?.backdrop_path || movie?.poster_path
@@ -51,6 +71,12 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
             />
           </div>
           <div className="text-lg font-bold md:text-2xl">{movie?.title}</div>
+          <div
+            onClick={() => setTrailer(!trailer)}
+            className="cursor-pointer border-2 p-1 rounded-md bg-orange-500"
+          >
+            Fragmanı İzle
+          </div>
         </div>
       </div>
       <div className="container mt-3 flex justify-center items-center flex-col">
