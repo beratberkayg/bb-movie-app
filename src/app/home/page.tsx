@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Search from "@/components/main/Search";
 import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { logOut } from "@/redux/authSlice";
+
 
 interface SearchParams {
   [key: string]: string | string[];

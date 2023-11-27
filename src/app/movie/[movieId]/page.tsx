@@ -16,11 +16,12 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   }, [id]);
 
   const [showText, setShowText] = useState<boolean>(false);
+  const voteAverage = movie.vote_average?.toFixed();
 
   return (
     <div className="mt-5 h-full">
       {loading && <Preloader />}
-      <Search />
+
       <div className="relative container mt-5 flex flex-col gap-3 justify-center ">
         <div className="relative w-full h-[200px] md:h-[300px] lg:h-[350px]">
           <Image
@@ -58,7 +59,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
 
         <div
           className={`w-9 h-9 flex items-center justify-center rounded-full bg-white font-bold border-4 text-xl ${
-            movie.vote_average?.toFixed() > 6
+            voteAverage && parseFloat(voteAverage) > 6
               ? "text-green-600 border-green-600"
               : " text-yellow-500 border-yellow-500"
           }`}

@@ -18,8 +18,10 @@ const MoiveCard = ({ movie }: { movie: MovieType }) => {
         src={`https://image.tmdb.org/t/p/original/${
           movie?.backdrop_path || movie?.poster_path
         }`}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         style={{ objectFit: "cover" }}
         className="rounded-xl"
+        priority
       />
       <div className="absolute bottom-0 left-0 text-center w-full text-xl text-white shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md">
         {movie?.title ? movie.title : "İsim Düşünüyoruz"}

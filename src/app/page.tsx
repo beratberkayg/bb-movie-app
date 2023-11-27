@@ -13,7 +13,6 @@ const Home: React.FC = () => {
       setPageLoading(false);
       router.push("/home");
     }, 1500);
-
     return () => clearTimeout(timer);
   }, [pageLoading]);
 
