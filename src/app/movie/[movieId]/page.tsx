@@ -131,11 +131,13 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
         </p>
       </div>
       <Post movie={movie} />
-
-      <div className="flex justify-center items-center flex-wrap gap-5 my-5">
-        {yorumlar.map((yorum) => (
-          <Comment key={yorum.id} yorum={yorum} id={id} />
-        ))}
+      <div className="flex items-center justify-center flex-wrap border mt-5 gap-3">
+        {yorumlar.map(
+          (yorum) =>
+            yorum.movieId.toString() === id && (
+              <Comment key={yorum.id} yorum={yorum} id={id} />
+            )
+        )}
       </div>
     </div>
   );
