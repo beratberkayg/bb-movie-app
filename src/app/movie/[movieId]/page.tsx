@@ -7,6 +7,7 @@ import { getMovie, getVideos } from "@/redux/movieSlice";
 import Preloader from "@/components/preloader/Preloader";
 import YouTube, { YouTubeProps } from "react-youtube";
 import { IoClose } from "react-icons/io5";
+import Post from "@/components/main/Post";
 
 const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const id = params.movieId;
@@ -28,7 +29,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   };
 
   return (
-    <div className="mt-5 h-full">
+    <div className="mt-5">
       {loading && <Preloader />}
 
       <div className="relative container mt-5 flex flex-col gap-3 justify-center ">
@@ -49,7 +50,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
           <div className="relative w-[200px] h-[100px] md:w-[400px] md:h-[180px] lg:w-[600px] lg:h-[250px] ">
             {trailer && (
               <div className="absolute z-10 w-full justify-center items-center hidden md:flex">
-                <YouTube opts={opts} videoId={video.key} />
+                <YouTube opts={opts} videoId={video?.key} />
                 <div
                   onClick={() => setTrailer(!trailer)}
                   className="absolute top-0 z-50 cursor-pointer text-red-600 border-2 rounded-full bg-white"
@@ -73,7 +74,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
           <div className="text-lg font-bold md:text-2xl">{movie?.title}</div>
           <div
             onClick={() => setTrailer(!trailer)}
-            className="cursor-pointer border-2 p-1 rounded-md bg-orange-500"
+            className="cursor-pointer border-2 p-1 rounded-md bg-orange-500 hidden md:flex"
           >
             Fragmanı İzle
           </div>
@@ -106,6 +107,9 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
         >
           {movie.overview}
         </p>
+      </div>
+      <div>
+        <Post movie={movie} />
       </div>
     </div>
   );
