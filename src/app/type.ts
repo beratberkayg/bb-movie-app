@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface MovieType {
   adult?: boolean;
   backdrop_path?: string;
@@ -21,3 +23,12 @@ export interface initialStateProps {
   email: string;
   password: string;
 }
+
+export type YorumlarProps = {
+  id: string;
+  yorum: string;
+  kullaniciAd: string;
+  kullaniciId: string;
+  tarih: Timestamp;
+  movieId: number;
+};

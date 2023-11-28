@@ -2,27 +2,42 @@
 import { MovieType } from "@/app/type";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
+import { auth, db } from "@/utils/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface postType {
   yorum: string | string[];
-  movieId: any;
 }
 
 const Post = ({ movie }: { movie: MovieType }) => {
   const [post, setPost] = useState<postType>({
     yorum: "",
-    movieId: movie.id,
   });
+  const [user, loading] = useAuthState(auth);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(post);
+    if (post.yorum.length < 3) {
+      return;
+    }
+    const collectionRef = collection(db, "yorumlar");
+    await addDoc(collectionRef, {
+      ...post,
+      tarih: serverTimestamp(),
+      movieId: movie.id,
+      kullaniciAd: user?.displayName,
+      kullaniciId: user?.uid,
+    });
+
+    setPost({ yorum: "" });
   };
+
   return (
     <div className="mt-3 border-t flex flex-col items-center   ">
       <div className="text-xl md:text-2xl text-center">Kullanıcı Yorumları</div>
       <div className=" border border-orange-500 rounded-xl w-full md:w-[70%] h-40 flex  gap-3 p-3">
-        <FaUser size={60} color={"orange"} />
+        <FaUser size={50} color={"orange"} />
         <form
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-end gap-3"

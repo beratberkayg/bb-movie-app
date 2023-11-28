@@ -8,6 +8,10 @@ import Preloader from "@/components/preloader/Preloader";
 import YouTube, { YouTubeProps } from "react-youtube";
 import { IoClose } from "react-icons/io5";
 import Post from "@/components/main/Post";
+import Comment from "@/components/main/Comment";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { auth, db } from "@/utils/firebase";
+import { YorumlarProps } from "@/app/type";
 
 const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const id = params.movieId;
@@ -17,6 +21,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   useEffect(() => {
     dispatch(getMovie(id));
     dispatch(getVideos(id));
+    getYorumlar();
   }, [id]);
 
   const [showText, setShowText] = useState<boolean>(false);
@@ -26,6 +31,23 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const opts: YouTubeProps["opts"] = {
     height: "500",
     width: "650",
+  };
+
+  // Postları getirme işlemi
+
+  const [yorumlar, setYorumlar] = useState<YorumlarProps[]>([]);
+
+  const getYorumlar = async () => {
+    const collectionRef = collection(db, "yorumlar");
+    const q = query(collectionRef, orderBy("tarih", "desc"));
+    const unsub = onSnapshot(q, (snap) => {
+      setYorumlar(
+        snap.docs.map((doc) => ({
+          ...(doc.data() as YorumlarProps),
+          id: doc.id,
+        }))
+      );
+    });
   };
 
   return (
@@ -108,8 +130,12 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
           {movie.overview}
         </p>
       </div>
-      <div>
-        <Post movie={movie} />
+      <Post movie={movie} />
+
+      <div className="flex justify-center items-center flex-wrap gap-5 my-5">
+        {yorumlar.map((yorum) => (
+          <Comment key={yorum.id} yorum={yorum} id={id} />
+        ))}
       </div>
     </div>
   );
