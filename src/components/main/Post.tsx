@@ -28,6 +28,7 @@ const Post = ({ movie }: { movie: MovieType }) => {
       movieId: movie.id,
       kullaniciAd: user?.displayName,
       kullaniciId: user?.uid,
+      movie: movie,
     });
 
     setPost({ yorum: "" });

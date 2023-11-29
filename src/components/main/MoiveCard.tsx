@@ -23,7 +23,7 @@ const MoiveCard = ({ movie }: { movie: MovieType }) => {
         className="rounded-xl"
         priority
       />
-      <div className="absolute bottom-0 left-0 text-center w-full text-xl text-white shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md">
+      <div className="absolute bottom-0 left-0 text-center w-full text-xl text-white shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md line-clamp-1">
         {movie?.title ? movie.title : "İsim Düşünüyoruz"}
       </div>
       <div className="absolute w-full h-full rounded-xl hover:shadow-lg hover:shadow-[#2A0E61]/50 hover:bg-[#03001417] hover:backdrop-blur-md text-white opacity-0 hover:opacity-100 flex items-center justify-center flex-col text-xl">

@@ -9,53 +9,50 @@ import { auth } from "@/utils/firebase";
 import { YorumlarProps } from "@/app/type";
 import Link from "next/link";
 
-type CommentProps = {
+const Comment = ({
+  yorum,
+  id,
+  children,
+}: {
   yorum: YorumlarProps;
   id: string;
-};
-
-const Comment = ({ yorum, id }: { yorum: YorumlarProps; id: string }) => {
+  children: React.ReactNode;
+}) => {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
   const [showText, setShowText] = useState<boolean>(false);
-  console.log(yorum);
-  console.log(id);
-
-  console.log(yorum.kullaniciAd);
 
   return (
     <div
-      className={`rounded-lg w-full md:w-[310px] lg:w-[350px] h-26 md:h-32 lg:h-36 p-2 md:p-3 lg:p-5 flex gap-3 text-white bg-orange-500 ${
+      className={`rounded-lg w-full md:w-[310px] lg:w-[400px] h-26 md:h-32 lg:h-40 p-2 md:p-3 lg:p-5 flex gap-3 text-white bg-orange-500 ${
         showText ? " h-40 md:h-44 lg:h-48" : ""
       }`}
     >
       <div className="relative w-[30px] h-[30px]  ">
-        <Link
-          href={`/userprofile/${yorum.kullaniciId}`}
-          className="flex justify-center items-center border border-black text-xl rounded-full w-[30px] h-[30px] text-orange-500 bg-white"
-        >
+        <div className="flex justify-center items-center border border-black text-xl rounded-full w-[30px] h-[30px] text-orange-500 bg-white">
           <FaUser />
-        </Link>
+        </div>
       </div>
       <div className=" w-full flex flex-col gap-1">
-        <div className="flex items-center  lg:text-xl">
+        <div className="flex items-center gap-1  lg:text-xl">
           <p>{yorum?.kullaniciAd}</p>
-          <span className="text-slate-400 text-[10px]">
-            @{yorum?.kullaniciId}
-          </span>
         </div>
+        <Link className="text-blue-800" href={`/movie/${yorum.movie.id}`}>
+          {yorum.movie.title} filmine :
+        </Link>
         <div
           onClick={() =>
             yorum?.yorum.length > 70 ? setShowText(!showText) : ""
           }
           className={` first-letter:uppercase ${
             yorum?.yorum.length > 70 ? " line-clamp-2 cursor-pointer  " : ""
-          } ${showText ? "line-clamp-none" : ""} `}
+          } ${showText ? "line-clamp-none overflow-y-auto" : ""}  `}
         >
           {yorum?.yorum}
         </div>
       </div>
+      <div className="relative cursor-pointer">{children}</div>
     </div>
   );
 };

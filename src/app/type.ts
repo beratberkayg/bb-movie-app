@@ -31,4 +31,5 @@ export type YorumlarProps = {
   kullaniciId: string;
   tarih: Timestamp;
   movieId: number;
+  movie: MovieType;
 };

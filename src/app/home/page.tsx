@@ -26,7 +26,7 @@ const Anasayfa = ({ searchParams }: { searchParams: SearchParams }) => {
   const movies = Array.isArray(data) ? data : [];
 
   return (
-    <div className="container mt-3 md:mt-5 flex flex-col justify-center gap-7 2xl:w-full">
+    <div className=" mt-3 md:mt-5 flex flex-col justify-center gap-7 2xl:w-full">
       {user && <div>Hoş Geldin kullanıcı mevcut {user.displayName}</div>}
       <div className="md:hidden">
         <Search />
