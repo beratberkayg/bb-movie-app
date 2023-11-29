@@ -51,6 +51,7 @@ const Register = () => {
                 Kullanıcı Adı
               </p>
               <input
+                id="name"
                 required
                 value={name}
                 onChange={handleNameChange}
@@ -66,6 +67,7 @@ const Register = () => {
                 Email
               </p>
               <input
+                id="email"
                 required
                 value={email}
                 onChange={handleEmailChange}
@@ -84,6 +86,7 @@ const Register = () => {
                 Password
               </p>
               <input
+                id="password"
                 required
                 value={password}
                 onChange={handlePasswordChange}

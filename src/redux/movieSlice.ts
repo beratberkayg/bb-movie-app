@@ -6,13 +6,13 @@ const API_URL = "https://api.themoviedb.org/3/movie";
 const API_KEY = "b0eb0edb2f15cd5a1f6e9d6bd8e8a12f";
 
 interface initalProps {
-  loading: boolean;
+  isLoading: boolean;
   movie: MovieType;
   video: any;
 }
 
 const initialState: initalProps = {
-  loading: false,
+  isLoading: false,
   movie: {},
   video: {},
 };
@@ -48,11 +48,11 @@ export const movieSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(getMovie.pending, (state, action) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(getMovie.fulfilled, (state, action) => {
       state.movie = action.payload;
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(getVideos.fulfilled, (state, action) => {
       state.video = action.payload;

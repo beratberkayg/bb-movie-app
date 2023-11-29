@@ -34,8 +34,7 @@ const Post = ({ movie }: { movie: MovieType }) => {
   };
 
   return (
-    <div className="mt-3 border-t flex flex-col items-center   ">
-      <div className="text-xl md:text-2xl text-center">Kullanıcı Yorumları</div>
+    <div className="mt-3 py-3 border-t flex flex-col items-center   ">
       <div className=" border border-orange-500 rounded-xl w-full md:w-[70%] h-40 flex  gap-3 p-3">
         <FaUser size={50} color={"orange"} />
         <form
@@ -43,6 +42,7 @@ const Post = ({ movie }: { movie: MovieType }) => {
           className="w-full flex flex-col items-end gap-3"
         >
           <textarea
+            id="yorum"
             value={post.yorum}
             onChange={(e) =>
               setPost({
@@ -50,7 +50,7 @@ const Post = ({ movie }: { movie: MovieType }) => {
                 yorum: e.currentTarget.value,
               })
             }
-            placeholder="---> Hadi bir şeyler yaz..."
+            placeholder="---> Bir şeyler yaz..."
             className="w-full h-24 text-black outline-none rounded-sm text-xl"
           ></textarea>
           <button

@@ -12,10 +12,11 @@ import Comment from "@/components/main/Comment";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { auth, db } from "@/utils/firebase";
 import { YorumlarProps } from "@/app/type";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const id = params.movieId;
-  const { movie, loading, video } = useAppSelector((state) => state.movie);
+  const { movie, isLoading, video } = useAppSelector((state) => state.movie);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   };
 
   // Postları getirme işlemi
-
+  const [user, loading] = useAuthState(auth);
   const [yorumlar, setYorumlar] = useState<YorumlarProps[]>([]);
 
   const getYorumlar = async () => {
@@ -130,8 +131,11 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
           {movie.overview}
         </p>
       </div>
-      <Post movie={movie} />
-      <div className="flex items-center justify-center flex-wrap border mt-5 gap-3">
+      {user && <Post movie={movie} />}
+      <div className="text-xl md:text-2xl text-center mt-3 border-b">
+        Kullanıcı Yorumları
+      </div>
+      <div className="flex items-center justify-center flex-wrap mt-1 gap-3 py-3">
         {yorumlar.map(
           (yorum) =>
             yorum.movieId.toString() === id && (

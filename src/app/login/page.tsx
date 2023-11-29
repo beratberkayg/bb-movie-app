@@ -39,6 +39,7 @@ const Login = () => {
                 Email
               </p>
               <input
+                id="email"
                 required
                 value={email}
                 onChange={handleEmailChange}
@@ -57,6 +58,7 @@ const Login = () => {
                 Password
               </p>
               <input
+                id="password"
                 required
                 value={password}
                 onChange={handlePasswordChange}

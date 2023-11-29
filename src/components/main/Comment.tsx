@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { FaUser } from "react-icons/fa";
 import { auth } from "@/utils/firebase";
 import { YorumlarProps } from "@/app/type";
+import Link from "next/link";
 
 type CommentProps = {
   yorum: YorumlarProps;
@@ -30,15 +31,18 @@ const Comment = ({ yorum, id }: { yorum: YorumlarProps; id: string }) => {
       }`}
     >
       <div className="relative w-[30px] h-[30px]  ">
-        <div className="flex justify-center items-center border border-black text-xl rounded-full w-[30px] h-[30px] text-orange-500 bg-white">
+        <Link
+          href={`/userprofile/${yorum.kullaniciId}`}
+          className="flex justify-center items-center border border-black text-xl rounded-full w-[30px] h-[30px] text-orange-500 bg-white"
+        >
           <FaUser />
-        </div>
+        </Link>
       </div>
       <div className=" w-full flex flex-col gap-1">
         <div className="flex items-center  lg:text-xl">
           <p>{yorum?.kullaniciAd}</p>
           <span className="text-slate-400 text-[10px]">
-            @{yorum?.kullaniciAd}
+            @{yorum?.kullaniciId}
           </span>
         </div>
         <div
