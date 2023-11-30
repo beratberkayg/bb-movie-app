@@ -26,7 +26,7 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
   const [show, setShow] = useState(true);
   const [user, loading] = useAuthState(auth);
   const [yorumlar, setYorumlar] = useState<YorumlarProps[]>([]);
-  const [likeMovies, setLikeMovies] = useState([]);
+  const [likeMovies, setLikeMovies] = useState<MovieType[]>([]);
 
   const getUserData = async () => {
     if (loading) return;
@@ -58,8 +58,8 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
   }, [user, loading, user?.email]);
 
   const ref = doc(db, "users", `${user?.email}`);
-  const deleteLike = async (id: string) => {
-    const result = likeMovies.filter((movie) => movie.id !== id);
+  const deleteLike = async (id: number | any) => {
+    const result = likeMovies.filter((movie) => movie.id != id);
     await updateDoc(ref, {
       likes: result,
     });
@@ -94,19 +94,23 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
       <div className="mt-3">
         {show ? (
           <div className="flex items-center justify-center flex-wrap mt-1 gap-3 py-3">
-            {yorumlar.map((yorum) => (
-              <Comment key={yorum.id} yorum={yorum} id="">
-                {
-                  <div className="flex flex-col">
-                    <AiFillDelete
-                      onClick={() => deleteComment(yorum.id)}
-                      size={30}
-                      color={"red"}
-                    />
-                  </div>
-                }
-              </Comment>
-            ))}
+            {yorumlar && yorumlar.length > 0 ? (
+              yorumlar.map((yorum) => (
+                <Comment key={yorum.id} yorum={yorum} id="">
+                  {
+                    <div className="flex flex-col">
+                      <AiFillDelete
+                        onClick={() => deleteComment(yorum.id)}
+                        size={30}
+                        color={"red"}
+                      />
+                    </div>
+                  }
+                </Comment>
+              ))
+            ) : (
+              <div className="text-xl">Henüz Yorum Yapmadınız...</div>
+            )}
           </div>
         ) : (
           <div>
@@ -123,7 +127,9 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
                 ))}
               </div>
             ) : (
-              <div className="text-center">Henüz film beğenmediz...</div>
+              <div className="text-center text-xl">
+                Henüz film beğenmediz...
+              </div>
             )}
           </div>
         )}
