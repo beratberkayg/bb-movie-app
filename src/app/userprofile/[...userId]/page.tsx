@@ -96,7 +96,7 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
           <div className="flex items-center justify-center flex-wrap mt-1 gap-3 py-3">
             {yorumlar && yorumlar.length > 0 ? (
               yorumlar.map((yorum) => (
-                <Comment key={yorum.id} yorum={yorum} id="">
+                <Comment key={yorum.id} yorum={yorum}>
                   {
                     <div className="flex flex-col">
                       <AiFillDelete

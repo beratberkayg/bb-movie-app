@@ -33,7 +33,9 @@ const SearchPage = ({ params }: { params: { keyword: string } }) => {
       <div className="w-full flex flex-wrap justify-evenly gap-3">
         {searchMovies && searchMovies.length > 0 ? (
           searchMovies.map((search) => (
-            <MoiveCard key={search.id} movie={search} />
+            <MoiveCard key={search.id} movie={search}>
+              {}
+            </MoiveCard>
           ))
         ) : (
           <div className="text-white text-2xl ">Malesef Sonuç Bulunmadı.</div>
