@@ -7,13 +7,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  doc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 const initialState: initialStateProps = {
   name: "",

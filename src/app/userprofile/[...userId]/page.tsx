@@ -6,7 +6,7 @@ import { auth, db } from "@/utils/firebase";
 import { FaUser } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import {
-  Timestamp,
+  updateDoc,
   collection,
   deleteDoc,
   doc,
@@ -14,9 +14,11 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { YorumlarProps } from "@/app/type";
+import { MovieType, YorumlarProps } from "@/app/type";
 import Comment from "@/components/main/Comment";
 import { AiFillDelete } from "react-icons/ai";
+import MoiveCard from "@/components/main/MoiveCard";
+import { FaHeart } from "react-icons/fa";
 
 const UserProfile = ({ params }: { params: { userId: string } }) => {
   const userId = params.userId[0];
@@ -24,6 +26,7 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
   const [show, setShow] = useState(true);
   const [user, loading] = useAuthState(auth);
   const [yorumlar, setYorumlar] = useState<YorumlarProps[]>([]);
+  const [likeMovies, setLikeMovies] = useState([]);
 
   const getUserData = async () => {
     if (loading) return;
@@ -39,6 +42,10 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
         }))
       );
     });
+
+    onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
+      setLikeMovies(doc.data()?.likes || []);
+    });
   };
 
   const deleteComment = async (id: string) => {
@@ -48,9 +55,15 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
 
   useEffect(() => {
     getUserData();
-  }, [user, loading]);
+  }, [user, loading, user?.email]);
 
-  console.log(yorumlar);
+  const ref = doc(db, "users", `${user?.email}`);
+  const deleteLike = async (id: string) => {
+    const result = likeMovies.filter((movie) => movie.id !== id);
+    await updateDoc(ref, {
+      likes: result,
+    });
+  };
 
   return (
     <div className="mt-3">
@@ -96,7 +109,23 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
             ))}
           </div>
         ) : (
-          <div>Beğendiklerim</div>
+          <div>
+            {likeMovies && likeMovies.length > 0 ? (
+              <div className="w-full flex flex-wrap justify-evenly gap-3">
+                {likeMovies.map((movie, i) => (
+                  <MoiveCard key={i} movie={movie}>
+                    {
+                      <div onClick={() => deleteLike(movie.id)}>
+                        <FaHeart size={30} color={"red"} />
+                      </div>
+                    }
+                  </MoiveCard>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center">Henüz film beğenmediz...</div>
+            )}
+          </div>
         )}
       </div>
     </div>

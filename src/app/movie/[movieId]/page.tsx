@@ -54,19 +54,17 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   };
 
   const [like, setLike] = useState<boolean>(false);
-  const [saved, setSaved] = useState<boolean>(false);
+
   const key = doc(db, "users", `${user?.email}`);
 
   const saveShow = async () => {
     if (user?.email) {
       setLike(!like);
-      setSaved(true);
       await updateDoc(key, {
         likes: arrayUnion({
           id: movie.id,
           title: movie.title,
-          img: movie.backdrop_path,
-          movie: movie,
+          backdrop_path: movie.backdrop_path || movie.poster_path,
         }),
       });
     }
@@ -104,7 +102,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
               </div>
             )}
             <Image
-              src={`https://image.tmdb.org/t/p/original/${
+              src={`https://image.tmdb.org/t/p/original${
                 movie?.backdrop_path || movie?.poster_path
               }`}
               alt=""
