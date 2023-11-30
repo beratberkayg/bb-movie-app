@@ -17,7 +17,7 @@ const MoiveCard = ({
   const [user, loading] = useAuthState(auth);
 
   return (
-    <div className="relative w-[130px] h-[200px] sm:w-[200px] sm:h-[300px] md:w-[210px] md:h-[300px] lg:w-[250px] shadow-[#2A0E61]/50 rounded-xl cursor-pointer">
+    <div className="relative w-[140px] h-[200px] sm:w-[200px] sm:h-[300px] md:w-[210px] md:h-[300px] lg:w-[250px] shadow-[#2A0E61]/50 rounded-xl cursor-pointer">
       <Image
         alt=""
         fill

@@ -46,8 +46,6 @@ const Anasayfa = ({ searchParams }: { searchParams: SearchParams }) => {
 
   const movies = Array.isArray(data) ? data : [];
 
-  console.log(yorumlar);
-
   return (
     <div className=" mt-3 md:mt-5 flex flex-col justify-center gap-7 2xl:w-full">
       {user && (
@@ -69,7 +67,7 @@ const Anasayfa = ({ searchParams }: { searchParams: SearchParams }) => {
         </div>
       ) : null}
 
-      <div className="md:hidden">
+      <div className="md:hidden border border-blue-800 rounded-md shadow-[#2A0E61] shadow-lg">
         <Search />
       </div>
 

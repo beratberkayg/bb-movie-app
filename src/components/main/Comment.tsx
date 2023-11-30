@@ -35,7 +35,10 @@ const Comment: React.FC<CommentProps> = ({ yorum, children }) => {
         <div className="flex items-center gap-1  lg:text-xl">
           <p>{yorum?.kullaniciAd}</p>
         </div>
-        <Link className="text-blue-800" href={`/movie/${yorum.movie.id}`}>
+        <Link
+          className="text-blue-800 line-clamp-1"
+          href={`/movie/${yorum.movie.id}`}
+        >
           {yorum.movie.title} filmine :
         </Link>
         <div
