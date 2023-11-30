@@ -9,15 +9,12 @@ import { auth } from "@/utils/firebase";
 import { YorumlarProps } from "@/app/type";
 import Link from "next/link";
 
-const Comment = ({
-  yorum,
-  id,
-  children,
-}: {
+interface CommentProps {
   yorum: YorumlarProps;
-  id: string;
   children: React.ReactNode;
-}) => {
+}
+
+const Comment: React.FC<CommentProps> = ({ yorum, children }) => {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
@@ -25,7 +22,7 @@ const Comment = ({
 
   return (
     <div
-      className={`rounded-lg w-full md:w-[310px] lg:w-[400px] h-26 md:h-32 lg:h-40 p-2 md:p-3 lg:p-5 flex gap-3 text-white bg-orange-500 ${
+      className={`rounded-lg w-full md:w-[310px] lg:w-[400px] h-26 md:h-32 lg:h-38 p-2 md:p-3 lg:p-5 flex gap-3 text-white bg-orange-500 ${
         showText ? " h-40 md:h-44 lg:h-48" : ""
       }`}
     >

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Search from "@/components/main/Search";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import { getMovie, getVideos } from "@/redux/movieSlice";
@@ -34,6 +33,10 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const opts: YouTubeProps["opts"] = {
     height: "500",
     width: "650",
+  };
+  const opts2: YouTubeProps["opts"] = {
+    width: "300",
+    height: "200px",
   };
 
   // Postları getirme işlemi
@@ -73,6 +76,18 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   return (
     <div className="mt-5">
       {loading && <Preloader />}
+
+      {trailer && (
+        <div className="md:hidden relative">
+          <YouTube opts={opts2} videoId={video?.key} />
+          <div
+            onClick={() => setTrailer(!trailer)}
+            className="absolute top-0 right-0 z-50 cursor-pointer text-red-600 border-2 rounded-full bg-white"
+          >
+            <IoClose size={30} />
+          </div>
+        </div>
+      )}
 
       <div className="relative container mt-5 flex flex-col gap-3 justify-center ">
         <div className="relative w-full h-[200px] md:h-[300px] lg:h-[350px]">
@@ -121,7 +136,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
           <div className="text-lg font-bold md:text-2xl">{movie?.title}</div>
           <div
             onClick={() => setTrailer(!trailer)}
-            className="cursor-pointer border-2 p-1 rounded-md bg-orange-500 hidden md:flex"
+            className="cursor-pointer border-2 p-1 rounded-md bg-orange-500 flex"
           >
             Fragmanı İzle
           </div>
@@ -163,7 +178,7 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
         {yorumlar.map(
           (yorum) =>
             yorum.movieId.toString() === id && (
-              <Comment key={yorum.id} yorum={yorum} id={id}>
+              <Comment key={yorum.id} yorum={yorum}>
                 {}
               </Comment>
             )

@@ -20,7 +20,7 @@ const HamburgerMenu: React.FC<HMenuProps> = ({ menu, setMenu }) => {
     setMenu(!menu);
   };
   return (
-    <div className="w-[180px] h-[180px] z-10 rounded-md bg-orange-500 absolute lg:top-24 lg:right-28 top-20 right-3 transition-all flex flex-col justify-center items-center">
+    <div className="w-[180px] h-[180px] z-10 rounded-md bg-orange-500 absolute lg:top-24 lg:right-28 top-20 right-3 transition-all flex flex-col justify-center items-center border border-white">
       <div
         className=" absolute right-0 top-2 cursor-pointer hover:text-red-500"
         onClick={() => setMenu(!menu)}
