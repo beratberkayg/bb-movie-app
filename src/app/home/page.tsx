@@ -57,7 +57,7 @@ const Anasayfa = ({ searchParams }: { searchParams: SearchParams }) => {
       {yorumlar.length > 0 ? (
         <div>
           <div>Kullanıcıların yaptığı son yorumlar:</div>
-          <div className="flex items-center justify-center flex-wrap mt-1 gap-3 py-3 w-full overflow-x-hidden h-[120px] md:h-[150px]">
+          <div className="flex items-center justify-center flex-wrap mt-1 gap-3 py-3 w-full overflow-x-hidden h-[120px] md:h-[180px]">
             {yorumlar.map((yorum) => (
               <Comment key={yorum.id} yorum={yorum}>
                 {}

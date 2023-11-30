@@ -76,7 +76,7 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
       <div className="mt-3 w-full flex justify-around lg:justify-around px-2 py-1 text-sm md:text-xl lg:text-2xl font-medium border-b border-blue-700 shadow-xl shadow-[#2A0E61]/50">
         <div
           onClick={() => setShow(!show)}
-          className={`cursor-pointer ${
+          className={`cursor-pointer text-xl ${
             show ? " text-blue-500 -translate-y-1" : ""
           }`}
         >
@@ -84,7 +84,7 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
         </div>
         <div
           onClick={() => setShow(!show)}
-          className={`cursor-pointer ${
+          className={`cursor-pointer text-xl ${
             show ? " " : "text-blue-500 -translate-y-1"
           }`}
         >

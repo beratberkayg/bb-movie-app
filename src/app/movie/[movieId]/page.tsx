@@ -91,17 +91,21 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
 
       <div className="relative container mt-5 flex flex-col gap-3 justify-center ">
         <div className="relative w-full h-[200px] md:h-[300px] lg:h-[350px]">
-          <Image
-            src={`https://image.tmdb.org/t/p/original/${
-              movie?.backdrop_path || movie?.poster_path
-            }`}
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            objectFit="cover"
-            className="rounded-lg"
-            objectPosition="center"
-          />
+          {isLoading ? (
+            <div>Yükeleniyor</div>
+          ) : (
+            <Image
+              src={`https://image.tmdb.org/t/p/original/${
+                movie?.backdrop_path || movie?.poster_path
+              }`}
+              alt=""
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              objectFit="cover"
+              className="rounded-lg"
+              objectPosition="center"
+            />
+          )}
         </div>
         <div className="absolute top-0 left-0 w-full h-full backdrop-blur-sm text-white flex flex-col items-center py-3 md:py-7 lg:py-10 gap-3 rounded-lg">
           <div className="relative w-[200px] h-[100px] md:w-[400px] md:h-[180px] lg:w-[600px] lg:h-[250px] ">
@@ -116,17 +120,21 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
                 </div>
               </div>
             )}
-            <Image
-              src={`https://image.tmdb.org/t/p/original${
-                movie?.backdrop_path || movie?.poster_path
-              }`}
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              objectFit="cover"
-              className="rounded-lg"
-            />
+            {isLoading ? (
+              <div>Yükleniyor</div>
+            ) : (
+              <Image
+                src={`https://image.tmdb.org/t/p/original${
+                  movie?.backdrop_path || movie?.poster_path
+                }`}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                objectFit="cover"
+                className="rounded-lg"
+              />
+            )}
           </div>
           {user && (
             <div onClick={saveShow}>

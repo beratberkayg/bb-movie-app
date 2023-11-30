@@ -46,7 +46,7 @@ const Comment: React.FC<CommentProps> = ({ yorum, children }) => {
             yorum?.yorum.length > 70 ? setShowText(!showText) : ""
           }
           className={` first-letter:uppercase ${
-            yorum?.yorum.length > 70 ? " line-clamp-2 cursor-pointer  " : ""
+            yorum?.yorum.length > 70 ? " line-clamp-1 cursor-pointer  " : ""
           } ${showText ? "line-clamp-none overflow-y-auto" : ""}  `}
         >
           {yorum?.yorum}

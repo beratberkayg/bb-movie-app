@@ -18,17 +18,22 @@ const MoiveCard = ({
 
   return (
     <div className="relative w-[140px] h-[200px] sm:w-[200px] sm:h-[300px] md:w-[210px] md:h-[300px] lg:w-[250px] shadow-[#2A0E61]/50 rounded-xl cursor-pointer">
-      <Image
-        alt=""
-        fill
-        src={`https://image.tmdb.org/t/p/original${
-          movie?.backdrop_path || movie?.poster_path
-        }`}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        style={{ objectFit: "cover" }}
-        className="rounded-xl"
-        priority
-      />
+      {loading ? (
+        <div className="text-white">Yükleniyor</div>
+      ) : (
+        <Image
+          alt=""
+          fill
+          src={`https://image.tmdb.org/t/p/original${
+            movie?.backdrop_path || movie?.poster_path
+          }`}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: "cover" }}
+          className="rounded-xl"
+          priority
+        />
+      )}
+
       <div
         onClick={() => router.push(`/movie/${movie.id}`)}
         className="absolute bottom-0 left-0 text-center w-full text-xl text-white shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md line-clamp-1"
