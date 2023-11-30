@@ -13,6 +13,8 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { auth, db } from "@/utils/firebase";
 import { YorumlarProps } from "@/app/type";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Like from "@/components/main/Like";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 
 const MovieDetail = ({ params }: { params: { movieId: string } }) => {
   const id = params.movieId;
@@ -49,6 +51,25 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
         }))
       );
     });
+  };
+
+  const [like, setLike] = useState<boolean>(false);
+  const [saved, setSaved] = useState<boolean>(false);
+  const key = doc(db, "users", `${user?.email}`);
+
+  const saveShow = async () => {
+    if (user?.email) {
+      setLike(!like);
+      setSaved(true);
+      await updateDoc(key, {
+        likes: arrayUnion({
+          id: movie.id,
+          title: movie.title,
+          img: movie.backdrop_path,
+          movie: movie,
+        }),
+      });
+    }
   };
 
   return (
@@ -94,6 +115,11 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
               className="rounded-lg"
             />
           </div>
+          {user && (
+            <div onClick={saveShow}>
+              <Like like={like} setLike={setLike} />
+            </div>
+          )}
           <div className="text-lg font-bold md:text-2xl">{movie?.title}</div>
           <div
             onClick={() => setTrailer(!trailer)}
@@ -139,7 +165,9 @@ const MovieDetail = ({ params }: { params: { movieId: string } }) => {
         {yorumlar.map(
           (yorum) =>
             yorum.movieId.toString() === id && (
-              <Comment key={yorum.id} yorum={yorum} id={id} />
+              <Comment key={yorum.id} yorum={yorum} id={id}>
+                {}
+              </Comment>
             )
         )}
       </div>

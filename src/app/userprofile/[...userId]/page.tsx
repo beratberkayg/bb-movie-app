@@ -16,12 +16,12 @@ import {
 } from "firebase/firestore";
 import { YorumlarProps } from "@/app/type";
 import Comment from "@/components/main/Comment";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 
 const UserProfile = ({ params }: { params: { userId: string } }) => {
   const userId = params.userId[0];
   const router = useRouter();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [user, loading] = useAuthState(auth);
   const [yorumlar, setYorumlar] = useState<YorumlarProps[]>([]);
 
@@ -79,9 +79,7 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
         </div>
       </div>
       <div className="mt-3">
-        {!show ? (
-          <div>Beğendiğim filmler</div>
-        ) : (
+        {show ? (
           <div className="flex items-center justify-center flex-wrap mt-1 gap-3 py-3">
             {yorumlar.map((yorum) => (
               <Comment key={yorum.id} yorum={yorum} id="">
@@ -97,6 +95,8 @@ const UserProfile = ({ params }: { params: { userId: string } }) => {
               </Comment>
             ))}
           </div>
+        ) : (
+          <div>Beğendiklerim</div>
         )}
       </div>
     </div>

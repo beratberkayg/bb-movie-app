@@ -1,13 +1,19 @@
 import { initialStateProps } from "@/app/type";
-import { auth } from "@/utils/firebase";
+import { auth, db } from "@/utils/firebase";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateCurrentUser,
   updateProfile,
 } from "firebase/auth";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 
 const initialState: initialStateProps = {
   name: "",
@@ -28,6 +34,9 @@ export const register = createAsyncThunk(
   }) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(user.user, { displayName: name });
+    setDoc(doc(db, "users", email), {
+      likes: [],
+    });
   }
 );
 
